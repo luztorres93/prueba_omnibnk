@@ -1,0 +1,7 @@
+ {% block content %}  
+<!-- Search form -->
+     <form method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
+  {% endblock %}

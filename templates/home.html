@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+  <div class="container">
+     <br>
+     <br>
+    <!-- Search form -->
+     <form method="GET" action="/search/" accept-charset="utf-8">
+        {% csrf_token %}
+        <input type="text"  class="form-control"  placeholder="Search ..." name="q" style="width: 100%; ;display: inline;">
+    </form>
+  
+
+<br>
+    <div class="row">
+    <div class="col-md-4" id="new_movie" >
+            <div class="card mb-4 box-shadow" style="min-height: 400px !important;"  onclick="location.href='{% url 'new_movie' %}'">
+                <img class="card-img-top" style="height: 200px !important;"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/OOjs_UI_icon_add.svg/1024px-OOjs_UI_icon_add.svg.png" data-holder-rendered="true">
+                <div class="card-body">
+                    <h3>New movie </h3>
+                    <p class="card-text"> Add and share with other users your  movies.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                   
+                
+                  </div>
+                </div>
+              </div>
+            </div>
+    {% for movie in object_movie %}
+        <div class="col-md-4" >
+            <div class="card mb-4 box-shadow" style="min-height: 400px !important;">
+                <img class="card-img-top" src="/{{ movie.image }}" data-holder-rendered="true" style="height: 200px !important;">
+                <div class="card-body">
+                    <h3>{{ movie.name }} </h3>
+                    <p class="card-text"> {{ movie.description|slice:"0:20" }} ... </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    
+                    <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'edit_movie' movie.id  %}" >Edit</a>
+                      <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'delete_movie' movie.id  %}">Delete</a>
+                      
+                    </div>
+                    <small class="text-muted">{{movie.created_at}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+   
+    </div>
+
+{% endblock %}

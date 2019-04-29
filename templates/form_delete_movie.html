@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div style="height:20px; width:100%"></div>
+<h3>Do you want to delete {{ movie.name }}</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+     {% if form.errors %}{{ form.errors }}{% endif %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-default" href="{% url 'home' %} ">Cancel</a>
+  </form>
+{% endblock %}
